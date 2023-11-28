@@ -32,7 +32,19 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
     'W': 'https://i.pinimg.com/originals/3b/80/bd/3b80bd599b411ca11964a523c65ab3a7.png',
     'Y': 'https://i.pinimg.com/originals/cd/65/32/cd6532a72e1e5c64a3c882f244d6ea10.png',
     'Z': 'https://i.pinimg.com/originals/34/0f/95/340f950d9a9c8d8936183f3ad42d4bf0.png',
+  };
 
+  Map<String, String> imagenesNumeros = {
+    '1': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F1.jpg?alt=media&token=1984d4bf-8d9b-4c93-a010-af24fdef4470',
+    '2': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F2.jpg?alt=media&token=7884253f-dff9-475a-ba00-1508e8c9f1e4',
+    '3': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F3.jpg?alt=media&token=fdd5511a-dda6-44a6-9989-d591c80c9c78',
+    '4': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F4.jpg?alt=media&token=24669fe3-6d63-4c80-9e90-5520d38cf054',
+    '5': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F5.jpg?alt=media&token=b8cfca18-0381-4778-bf12-2b5dfd19522d',
+    '6': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F6.jpg?alt=media&token=fa122ab9-637d-4816-94e7-0636fa5c380a',
+    '7': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F7.jpg?alt=media&token=08ebc97d-f352-4241-93b7-e417726a2426',
+    '8': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F8.jpg?alt=media&token=2c4d2b36-c980-44b8-b1fc-2c1b25bbb497',
+    '9': 'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F9.jpg?alt=media&token=ff20eeeb-abe9-452b-b834-ea195cb44fda',
+    '10':'https://firebasestorage.googleapis.com/v0/b/lenguajedesenas-f1e6d.appspot.com/o/numeros%2F10.jpg?alt=media&token=9166547c-a0df-40f8-a357-b2db0f442699',
   };
 
   @override
@@ -42,10 +54,9 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
         appBar: AppBar(
           title: Text(
             mostrarAbecedario ? 'Abecedario' : 'Números',
-            style: TextStyle(color: Colors.white,fontSize: 20.0, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
-          backgroundColor:
-            Colors.green,
+          backgroundColor: Colors.green,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -79,7 +90,6 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
                         onChanged: (value) {
                           // Filtrar las letras del abecedario según el texto ingresado
                           setState(() {
-                            // Utilizar el método 'startsWith' para filtrar las letras
                             imagenesAbecedario = imagenesAbecedario.map((key, value) {
                               return MapEntry(key, value);
                             });
@@ -97,14 +107,36 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
                 // Mostrar imágenes de números
                 Column(
                   children: [
-                  Center(
-                  child: numeroImage(
-                      'NUMEROS EN LENGUAJE DE SEÑAS',
-                      'https://i.pinimg.com/564x/6e/f2/61/6ef2616808c17bc39c896c2ad490e29f.jpg',
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          labelText: 'Buscar número',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          // Filtrar los números según el texto ingresado
+                          setState(() {
+                            imagenesNumeros = imagenesNumeros.map((key, value) {
+                              return MapEntry(key, value);
+                            });
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    for (var numero in imagenesNumeros.keys)
+                      if (numero.toLowerCase().contains(searchController.text.toLowerCase()))
+                        numeroImage(numero, imagenesNumeros[numero]!),
+                  ],
                 ),
-        )
-  ],
-),
               SizedBox(height: 16.0),
             ],
           ),
@@ -123,9 +155,7 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
                 style: ElevatedButton.styleFrom(
                   primary: mostrarAbecedario ? const Color.fromARGB(255, 33, 243, 131) : Colors.white,
                 ),
-                child: Text('Abecedario',
-                style: TextStyle(color: Colors.white)
-                ),
+                child: Text('Abecedario', style: TextStyle(color: Colors.white)),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -136,8 +166,7 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
                 style: ElevatedButton.styleFrom(
                   primary: mostrarAbecedario ? const Color.fromARGB(255, 33, 243, 131) : Color.fromARGB(255, 33, 243, 131),
                 ),
-                child: Text('Números',
-                style: TextStyle(color: Colors.white)),
+                child: Text('Números', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -151,31 +180,33 @@ class _AbecedarioScreenState extends State<AbecedarioScreen> {
       children: [
         Image.network(
           imageUrl,
-          width: 180.0,
-          height: 180.0,
+          width: 120.0,
+          height: 120.0,
           fit: BoxFit.cover,
         ),
         SizedBox(height: 16.0),
         Text(
           letra,
-          style: TextStyle(color: Colors.white, fontSize: 24.0),
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
         ),
         SizedBox(height: 16.0),
       ],
     );
   }
 
- Widget numeroImage(String numero, String imageUrl) {
+  Widget numeroImage(String numero, String imageUrl) {
     return Column(
       children: [
         Image.network(
           imageUrl,
+          width: 120.0,
+          height: 120.0,
           fit: BoxFit.cover,
         ),
         SizedBox(height: 16.0),
         Text(
           numero,
-          style: TextStyle(color: Colors.white, fontSize: 24.0),
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
         ),
         SizedBox(height: 16.0),
       ],

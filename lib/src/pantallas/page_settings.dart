@@ -1,8 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '';
+
 class PageSettings extends StatelessWidget {
   PageSettings({Key? key}) : super(key: key);
+  Future<void> logout() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +24,13 @@ class PageSettings extends StatelessWidget {
           IconButton(
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
+              logout();
             },
-            icon: const Icon(Icons.logout), // Cambié el ícono a cerrar sesión
+            icon: Icon(
+              Icons.logout, // Ícono de cerrar sesión
+              color: Colors.white, // Cambia el color del ícono a rojo
+              size: 27.0, // Cambia el tamaño del ícono a 30.0 puntos
+            ), // Cambié el ícono a cerrar sesión
           ),
         ],
         backgroundColor: Colors.green,
@@ -94,6 +106,24 @@ class PageSettings extends StatelessWidget {
                 ),
               );
             }),
+            SizedBox(height: 26.0),
+            ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                logout();
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green, // Color de fondo del botón
+                onPrimary: Colors.white, // Color del texto
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Cerrar Sesión',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -427,5 +457,4 @@ void encriptado(BuildContext context) {
       );
     },
   );
-  
 }

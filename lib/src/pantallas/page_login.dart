@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -89,6 +90,22 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<void> signInWithGoogle() async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential = await auth.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(hintText: "Email"),
+                  decoration: const InputDecoration(hintText: "Usuario"),
                 ),
                 // Campo de Contraseña
                 TextFormField(
@@ -207,6 +224,47 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           )
                         : const Text("SignUp"),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: TextButton(
+                    onPressed: () {
+                    
+                        signInWithGoogle();
+                    
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.green, // Color del texto
+                      backgroundColor: Colors.white, // Color de fondo del botón
+                    ),
+                    child: isLoading
+                        ? Container(
+                            child: const CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg', // URL de la imagen de Gmail
+                                width: 20,
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Inicio de sesión con Gmail',
+                                style: TextStyle(
+                                  color: Colors.green, // Color del texto
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ],

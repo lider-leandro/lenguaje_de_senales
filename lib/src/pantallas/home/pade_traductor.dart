@@ -150,7 +150,7 @@ class _TraductorScreenState extends State<TraductorScreen> {
             speechToText.stop();
           },
           child: CircleAvatar(
-            backgroundColor: Colors.green,
+            backgroundColor: isListening ? Colors.grey : Colors.green,
             radius: 35,
             child: Icon(
               isListening ? Icons.mic : Icons.mic_none,

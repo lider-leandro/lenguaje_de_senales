@@ -12,7 +12,6 @@ class _PageFavoriteState extends State<PageFavorite> {
   List<String> _favoriteImages = [];
   TextEditingController _searchController = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -21,45 +20,55 @@ class _PageFavoriteState extends State<PageFavorite> {
           style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        backgroundColor:
-            Colors.green, // Cambia el color de fondo de la barra de navegación
+        backgroundColor: Colors.green,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 70.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCategoryButton('Días de la semana'),
-                _buildCategoryButton('Saludos y Despedidas'),
-                _buildCategoryButton('Meses del año'),
-              ],
+      body: Column(
+        children: [
+          SizedBox(height: 20.0),
+          construirFilaDeBotones(),
+          SizedBox(height: 20.0),
+          _buildSearchBar(),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: _getImagesByCategory(
+                  _selectedCategory, _searchController.text),
             ),
-            SizedBox(height: 20.0),
-            _buildSearchBar(),
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _getImagesByCategory(
-                    _selectedCategory, _searchController.text),
-              ),
+          ),
+          SizedBox(height: 20.0),
+          ElevatedButton(
+            onPressed: _showSavedImages,
+            child: Text(
+              'Guardados',
+              style: TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: _showSavedImages,
-              child: Text('Guardados',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary:
-                    Colors.green, // Establecer el color de fondo como verde
-              ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.green,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-            ),
-          ],
-        ),
+  Widget construirFilaDeBotones() {
+    List<String> categorias = [
+      'Días de la semana',
+      'Saludos y Despedidas',
+      'Meses del año',
+    ];
+
+    return SizedBox(
+      height: 50.0,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categorias.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: _buildCategoryButton(categorias[index]),
+          );
+        },
       ),
     );
   }

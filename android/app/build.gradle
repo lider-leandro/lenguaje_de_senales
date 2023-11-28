@@ -26,6 +26,7 @@ android {
     namespace "com.example.lenguaje_de_senas_proyecto"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -50,6 +51,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true // se aumento esto
+        minSdkVersion 21
+        targetSdkVersion 33
     }
 
     buildTypes {

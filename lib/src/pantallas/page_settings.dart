@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '';
 
 class PageSettings extends StatelessWidget {
   PageSettings({Key? key}) : super(key: key);
@@ -35,11 +34,12 @@ class PageSettings extends StatelessWidget {
         ],
         backgroundColor: Colors.green,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
             SizedBox(height: 60.0),
             Stack(
               alignment: Alignment.bottomRight,
@@ -127,6 +127,7 @@ class PageSettings extends StatelessWidget {
           ],
         ),
       ),
+      )
     );
   }
 

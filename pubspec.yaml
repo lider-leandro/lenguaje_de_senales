@@ -43,6 +43,9 @@ dependencies:
   animated_bottom_navigation_bar: ^1.3.0
   bcrypt: ^1.1.3
   google_sign_in: ^6.1.6
+  speech_to_text: ^6.4.1
+  avatar_glow: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,3 +72,31 @@ flutter:
     - imagenes/home/abecedario.jpeg
     - imagenes/home/palabras_recurrentes.jpeg
     - imagenes/home/traductor.jpeg
+    - imagenes/abecedario/a.jpg
+    - imagenes/abecedario/b.jpg
+    - imagenes/abecedario/c.jpg
+    - imagenes/abecedario/d.jpg
+    - imagenes/abecedario/e.jpg
+    - imagenes/abecedario/f.jpg
+    - imagenes/abecedario/g.jpg
+    - imagenes/abecedario/h.jpg
+    - imagenes/abecedario/i.jpg
+    - imagenes/abecedario/j.png
+    - imagenes/abecedario/k.jpg
+    - imagenes/abecedario/l.jpg
+    - imagenes/abecedario/m.jpg
+    - imagenes/abecedario/n.jpg
+    - imagenes/abecedario/o.jpg
+    - imagenes/abecedario/p.jpg
+    - imagenes/abecedario/q.jpg
+    - imagenes/abecedario/r.jpg
+    - imagenes/abecedario/s.jpg
+    - imagenes/abecedario/t.jpg
+    - imagenes/abecedario/u.jpg
+    - imagenes/abecedario/v.jpg
+    - imagenes/abecedario/w.jpg
+    - imagenes/abecedario/x.jpg
+    - imagenes/abecedario/y.jpg
+    - imagenes/abecedario/z.jpg
+    - imagenes/abecedario/guion.png
+    

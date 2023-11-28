@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './home/page_palabras.dart';
 import './home/page_abecedario.dart';
 import '../pantallas/home/pade_traductor.dart';
+
 class PageHome extends StatelessWidget {
   PageHome({Key? key}) : super(key: key);
 
@@ -103,7 +104,7 @@ class PageHome extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30), 
+              SizedBox(height: 30),
               SizedBox(
                 width: 180.0,
                 height: 180.0,
@@ -111,7 +112,8 @@ class PageHome extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TraductorScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => TraductorScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -125,8 +127,8 @@ class PageHome extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'imagenes/home/palabras_recurrentes.jpeg',
+                      Image.network(
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0I84hKeaYIW7CKvT6QbOBzwqArk2-8PVtAqPjGST9yApeO7g2HMAFE_emqssCxg_hdBY&usqp=CAU',
                         width: 100.0,
                         height: 100.0,
                       ),
@@ -143,7 +145,7 @@ class PageHome extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),      
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -151,4 +153,3 @@ class PageHome extends StatelessWidget {
     );
   }
 }
-
